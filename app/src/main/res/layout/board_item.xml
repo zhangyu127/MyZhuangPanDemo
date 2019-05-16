@@ -13,7 +13,6 @@
 
         <RelativeLayout
             android:layout_gravity="center"
-            android:id="@+id/ll_up"
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:layout_weight="1"
@@ -41,7 +40,6 @@
 
         <RelativeLayout
             android:layout_gravity="center"
-            android:id="@+id/ll_down"
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:layout_weight="1">
