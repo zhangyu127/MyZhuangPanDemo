@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:wheelSurfView="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_all"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true">
+
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/guanbi3x" />
+
+
+        <!--  -->
+        <TextView
+            android:id="@+id/play"
+            android:layout_width="188dp"
+            android:layout_height="38dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="122dp"
+            android:background="@drawable/shape_floater_top_6"
+            android:gravity="center"
+            android:text="试试手气"
+            android:textColor="#FFFFFFFF"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:id="@+id/tv_add"
+            android:layout_width="188dp"
+            android:layout_height="38dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="80dp"
+            android:background="@drawable/shape_floater_top_6"
+            android:gravity="center"
+            android:text="添加人数"
+            android:textColor="#FFFFFFFF"
+            android:textSize="18sp" />
+
+
+        <RelativeLayout
+            android:id="@+id/rl_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_close">
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <com.keke.a10056.myzhuangpandemo.view.WheelSurfView
+                    android:id="@+id/wheelSurfView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    wheelSurfView:typenum="-1">
+
+
+                </com.keke.a10056.myzhuangpandemo.view.WheelSurfView>
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_dzp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></RelativeLayout>
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_centerInParent="true" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_jl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:clickable="true">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true">
+
+                        <ImageView
+                            android:layout_width="280dp"
+                            android:layout_height="280dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerInParent="true" />
+
+                        <ImageView
+                            android:id="@+id/iv_jl"
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ic_launcher"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+
+                <ImageView
+                    android:id="@+id/img_qidong"
+                    android:layout_width="70dp"
+                    android:layout_height="100dp"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/node" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>
