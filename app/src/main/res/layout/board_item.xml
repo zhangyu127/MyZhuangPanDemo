@@ -28,10 +28,11 @@
                 android:textColor="#FF0A407F"
                 android:textSize="11sp" />
 
+
             <ImageView
                 android:id="@+id/iv_1_ic"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="60dp" />
 

@@ -54,14 +54,12 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
         public boolean handleMessage(Message message) {
             switch (message.what) {
                 case 1:
-
                     for (int i = 0; i < views.size(); i++) {
                         ObjectAnimator animator = ObjectAnimator.ofFloat(views.get(i), "rotation", 0f, (float) (i * (360.0 / views.size())));
                         animator.setDuration(1);
                         animator.start();
                     }
                     putData();
-
 
                     break;
                 case 2:
@@ -107,7 +105,6 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
         initView();
         //初始化界面数据
         initData();
-
 
     }
 
@@ -218,18 +215,22 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
     /**
      * 删除数据
      **/
-    private void initClear(int num) {
+    private void initClear(final int num) {
 
-        colors.remove((colors.size() - num + 1) %
-                colors.size());
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                colors.remove((colors.size() - num + 1) %
+                        colors.size());
 
-        rl_dzp.removeView(views.get((colors.size() - num + 1) %
-                colors.size()));
+                rl_dzp.removeView(views.get((colors.size() - num + 1) %
+                        colors.size()));
 
-        views.remove((colors.size() - num + 1) %
-                colors.size());
+                views.remove((colors.size() - num + 1) %
+                        colors.size());
 
-        handler.sendEmptyMessage(1);
+                handler.sendEmptyMessage(1);
+            }
+        }, 2000);
     }
 
     /**
@@ -282,8 +283,8 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
             @Override
             public void onAnimationEnd(Animator animator) {
 
-                Toast.makeText(ac, num + "", Toast.LENGTH_LONG).show();
                 initClear(num);
+
             }
 
             @Override
