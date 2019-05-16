@@ -25,7 +25,7 @@ import java.util.List;
 public class BigSoundBoardDialog extends Dialog implements View.OnClickListener {
     private final Activity ac;
 
-
+    //转盘绑定
     private WheelSurfView.Builder build;
 
     //每个扇形旋转的时间
@@ -34,18 +34,24 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
     //最低圈数 默认值3 也就是说每次旋转都会最少转3圈
     private int mMinTime = 6;
 
+
+    //大转盘布局
     private RelativeLayout rl_dzp, rl_jl;
 
-
+    //添加每一个item集合
     private List<View> views;
     //每一个扇形的角度
     private float mAngle;
 
+
+    //颜色的集合
     private List<Integer> colors;
 
-
+       //控件大转盘背景背景
     private WheelSurfView wheelSurfView2;
 
+
+    //启动中间按钮
     private ImageView img_qidong;
 
 
@@ -53,7 +59,7 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
         @Override
         public boolean handleMessage(Message message) {
             switch (message.what) {
-                case 1:
+                case 1:     //删除
                     for (int i = 0; i < views.size(); i++) {
                         ObjectAnimator animator = ObjectAnimator.ofFloat(views.get(i), "rotation", 0f, (float) (i * (360.0 / views.size())));
                         animator.setDuration(1);
@@ -62,22 +68,26 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
                     putData();
 
                     break;
-                case 2:
+                case 2:   //添加
 
+                    //添加颜色
                     colors.add(Color.parseColor("#4394C5"));
 
+                    //添加扇形item布局
                     View inflate = LayoutInflater.from(getContext()).inflate(R.layout.board_item, rl_dzp, false);
                     View view = inflate.findViewById(R.id.ll_1);
                     views.add(view);
                     ((RelativeLayout) inflate).removeView(view);
                     rl_dzp.addView(view);
 
+
+                    //实现控件转移角度  形成一个大转盘
                     for (int i = 0; i < views.size(); i++) {
                         ObjectAnimator animator = ObjectAnimator.ofFloat(views.get(i), "rotation", 0f, (float) (i * (360.0 / views.size())));
                         animator.setDuration(1);
                         animator.start();
                     }
-
+                    //为每一个控件赋值  并计算角度
                     putData();
                     break;
                 default:
@@ -135,6 +145,7 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
         colors.add(Color.parseColor("#E83030"));
         colors.add(Color.parseColor("#464AE1"));
 
+        //实现item布局
         views = new ArrayList<>();
         for (int i = 0; i < colors.size(); i++) {
             View inflate = LayoutInflater.from(getContext()).inflate(R.layout.board_item, rl_dzp, false);
@@ -144,6 +155,7 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
             rl_dzp.addView(view);
         }
 
+        //转移角度   实现大转盘
         for (int i = 0; i < views.size(); i++) {
             ObjectAnimator animator = ObjectAnimator.ofFloat(views.get(i), "rotation", 0f, (float) (i * (360.0 / views.size())));
             animator.setDuration(1);
@@ -174,17 +186,17 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.play:
+            case R.id.play:    //按钮启动转盘
                 if (colors.size() == 1) {
                     Toast.makeText(ac, "目前只有一人无法进行游戏！！！！！", Toast.LENGTH_LONG).show();
                     return;
                 }
                 putLuckData(2);
                 break;
-            case R.id.iv_close:
+            case R.id.iv_close:   //dissmiss取消按钮
                 cancel();
                 break;
-            case R.id.img_qidong:
+            case R.id.img_qidong:   //中间转盘按钮
                 if (colors.size() == 1) {
                     Toast.makeText(ac, "目前只有一人无法进行游戏！！！！！", Toast.LENGTH_LONG).show();
                     return;
