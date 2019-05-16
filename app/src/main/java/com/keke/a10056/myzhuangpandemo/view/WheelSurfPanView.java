@@ -284,6 +284,53 @@ public class WheelSurfPanView extends View {
 
 
 
+
+
+    //目前的角度
+    private float currAngles = 0;
+    //记录上次的位置
+    private int lastPositions;
+
+    /**
+     * 转动角度
+     *
+     */
+    public void startZhangJiaoDu() {
+        //最低圈数是mMinTimes圈
+        int newAngle = (int) (360 * mMinTimes + (1 - 1) * mAngle + currAngles - (lastPositions == 0 ? 0 : ((lastPositions - 1) * mAngle)));
+        //计算目前的角度划过的扇形份数
+        int num = (int) ((newAngle - currAngles) / mAngle);
+        ObjectAnimator anim = ObjectAnimator.ofFloat(WheelSurfPanView.this, "rotation", currAngles, newAngle);
+        // 动画的持续时间，执行多久？
+        anim.setDuration(1);
+        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+            }
+        });
+        final float[] f = {0};
+        anim.setInterpolator(new TimeInterpolator() {
+            @Override
+            public float getInterpolation(float t) {
+                float f1 = (float) (Math.cos((t + 1) * Math.PI) / 2.0f) + 0.5f;
+                Log.e("HHHHHHHh", "" + t + "     " + (f[0] - f1));
+                f[0] = (float) (Math.cos((t + 1) * Math.PI) / 2.0f) + 0.5f;
+                return f[0];
+            }
+        });
+        anim.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+            }
+        });
+        // 正式开始启动执行动画
+        anim.start();
+    }
+
+
+
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         //视图是个正方形的 所以有宽就足够了 默认值是500 也就是WRAP_CONTENT的时候
@@ -321,6 +368,8 @@ public class WheelSurfPanView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
+
 
         // 计算初始角度
         // 从最上面开始绘制扇形会好看一点

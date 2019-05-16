@@ -129,6 +129,18 @@ public class WheelSurfView extends RelativeLayout {
     }
 
 
+    /**
+     * 旋转角度调整
+     *
+     * @param
+     */
+    public void startZhangJiaoDu() {
+        if (mWheelSurfPanView != null) {
+            mWheelSurfPanView.startZhangJiaoDu();
+        }
+    }
+
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         //视图是个正方形的 所以有宽就足够了 默认值是500 也就是WRAP_CONTENT的时候

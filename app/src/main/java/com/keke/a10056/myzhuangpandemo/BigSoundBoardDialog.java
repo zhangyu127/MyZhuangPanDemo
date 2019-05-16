@@ -54,12 +54,15 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
         public boolean handleMessage(Message message) {
             switch (message.what) {
                 case 1:
+
                     for (int i = 0; i < views.size(); i++) {
                         ObjectAnimator animator = ObjectAnimator.ofFloat(views.get(i), "rotation", 0f, (float) (i * (360.0 / views.size())));
                         animator.setDuration(1);
                         animator.start();
                     }
                     putData();
+
+
                     break;
                 case 2:
 
@@ -78,7 +81,6 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
                     }
 
                     putData();
-
                     break;
                 default:
                     break;
@@ -135,7 +137,6 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
         colors.add(Color.parseColor("#F6829F"));
         colors.add(Color.parseColor("#E83030"));
         colors.add(Color.parseColor("#464AE1"));
-        colors.add(Color.parseColor("#4394C5"));
 
         views = new ArrayList<>();
         for (int i = 0; i < colors.size(); i++) {
@@ -168,6 +169,7 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
             tv_1_num.setText(10 + i + "");
             iv_1_ic.setBackgroundResource(R.drawable._2_weixin);
         }
+        ZhuangJiaoDu();
         initChuShiHua();
     }
 
@@ -176,7 +178,7 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.play:
-                if (colors.size()==1){
+                if (colors.size() == 1) {
                     Toast.makeText(ac, "目前只有一人无法进行游戏！！！！！", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -186,9 +188,9 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
                 cancel();
                 break;
             case R.id.img_qidong:
-                if (colors.size()==1){
+                if (colors.size() == 1) {
                     Toast.makeText(ac, "目前只有一人无法进行游戏！！！！！", Toast.LENGTH_LONG).show();
-                   return;
+                    return;
                 }
                 putLuckData(2);
                 break;
@@ -239,6 +241,7 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
                 .setmTypeNum(colors.size())
                 .build();
         wheelSurfView2.setConfig(build);
+        wheelSurfView2.startZhangJiaoDu();
     }
 
 
@@ -268,7 +271,7 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
         ObjectAnimator animator = ObjectAnimator.ofFloat(rl_dzp, "rotation", currAngle, newAngle);
 
 //        currAngle = newAngle;
-//        lastPosition = num;
+////        lastPosition = num;
         animator.setDuration(nums * mVarTime);
         animator.addListener(new Animator.AnimatorListener() {
             @Override
@@ -295,4 +298,46 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
         });
         animator.start();
     }
+
+
+    /**
+     * 动画效果转盘
+     **/
+    //目前的角度
+    private float currAngles = 0;
+    //记录上次的位置
+    private int lastPositions;
+
+    private void ZhuangJiaoDu() {
+        //最低圈数是mMinTimes圈
+        int newAngle = (int) (360 * mMinTime + (1 - 1) * mAngle + currAngles - (lastPositions == 0 ? 0 : ((lastPositions - 1) * mAngle)));
+        //计算目前的角度划过的扇形份数
+        int nums = (int) ((newAngle - currAngles) / mAngle);
+
+        ObjectAnimator animator = ObjectAnimator.ofFloat(rl_dzp, "rotation", currAngles, newAngle);
+        animator.setDuration(1);
+
+        animator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+        animator.start();
+    }
+
 }
