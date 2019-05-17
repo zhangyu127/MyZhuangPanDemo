@@ -119,6 +119,13 @@
                     android:background="@mipmap/node" />
 
             </RelativeLayout>
+
+
+            <ImageView
+                android:id="@+id/img_face"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -47,12 +48,16 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
     //颜色的集合
     private List<Integer> colors;
 
-       //控件大转盘背景背景
+    //控件大转盘背景背景
     private WheelSurfView wheelSurfView2;
 
 
     //启动中间按钮
     private ImageView img_qidong;
+
+
+    //上面显示的图片
+    private ImageView img_face;
 
 
     private Handler handler = new Handler(new Handler.Callback() {
@@ -128,11 +133,14 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
         rl_jl = ((RelativeLayout) findViewById(R.id.rl_jl));
         wheelSurfView2 = findViewById(R.id.wheelSurfView2);
         img_qidong = findViewById(R.id.img_qidong);
+        img_face = findViewById(R.id.img_face);
+
 
         findViewById(R.id.play).setOnClickListener(this);
         findViewById(R.id.img_qidong).setOnClickListener(this);
         findViewById(R.id.iv_close).setOnClickListener(this);
         findViewById(R.id.tv_add).setOnClickListener(this);
+
     }
 
 
@@ -240,6 +248,7 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
                 views.remove((colors.size() - num + 1) %
                         colors.size());
 
+
                 handler.sendEmptyMessage(1);
             }
         }, 2000);
@@ -294,9 +303,8 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
 
             @Override
             public void onAnimationEnd(Animator animator) {
-
+                img_face.setBackgroundResource(R.drawable._2_weixin);
                 initClear(num);
-
             }
 
             @Override
@@ -352,5 +360,4 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
         });
         animator.start();
     }
-
 }
