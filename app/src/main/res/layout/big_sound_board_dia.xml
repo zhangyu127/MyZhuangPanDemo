@@ -63,7 +63,7 @@
                 <com.keke.a10056.myzhuangpandemo.view.WheelSurfView
                     android:id="@+id/wheelSurfView2"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     wheelSurfView:typenum="-1">
 
@@ -73,6 +73,7 @@
 
                 <RelativeLayout
                     android:id="@+id/rl_dzp"
+                    android:layout_centerInParent="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"></RelativeLayout>
 
