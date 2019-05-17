@@ -6,12 +6,14 @@ import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,6 +27,10 @@ import java.util.List;
 
 public class BigSoundBoardDialog extends Dialog implements View.OnClickListener {
     private final Activity ac;
+
+    private AlphaAnimation alphaAnimation;
+    private TransitionDrawable transitionDrawable;
+
 
     //转盘绑定
     private WheelSurfView.Builder build;
@@ -65,6 +71,12 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
         public boolean handleMessage(Message message) {
             switch (message.what) {
                 case 1:     //删除
+
+                    img_face.setAlpha(0.0f);
+                    img_face.setAnimation(alphaAnimation);
+                    alphaAnimation.start();
+
+
                     for (int i = 0; i < views.size(); i++) {
                         ObjectAnimator animator = ObjectAnimator.ofFloat(views.get(i), "rotation", 0f, (float) (i * (360.0 / views.size())));
                         animator.setDuration(1);
@@ -148,6 +160,13 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
      * 初始化界面控件的显示数据
      */
     private void initData() {
+
+        //一开始先设置透明，这样图片不会显示，等点击按钮时再显示
+        img_face.setAlpha(0.0f);
+        alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+        alphaAnimation.setDuration(2000);    //深浅动画持续时间
+        alphaAnimation.setFillAfter(true);   //动画结束时保持结束的画面
+
         colors = new ArrayList<>();
         colors.add(Color.parseColor("#F6829F"));
         colors.add(Color.parseColor("#E83030"));
@@ -251,12 +270,10 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
                     views.remove((colors.size() - num + 1) %
                             colors.size());
                 }
-
-
-
                 handler.sendEmptyMessage(1);
             }
-        }, 2000);
+
+        }, 4000);
     }
 
     /**
@@ -309,6 +326,11 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
             @Override
             public void onAnimationEnd(Animator animator) {
                 img_face.setBackgroundResource(R.drawable._2_weixin);
+
+                img_face.setAlpha(1.0f);
+                img_face.setAnimation(alphaAnimation);
+                alphaAnimation.start();
+
                 initClear(num);
             }
 
