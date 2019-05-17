@@ -71,7 +71,7 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
         public boolean handleMessage(Message message) {
             switch (message.what) {
                 case 1:     //删除
-
+                    //动画取消    
                     img_face.setAlpha(0.0f);
                     img_face.setAnimation(alphaAnimation);
                     alphaAnimation.start();
@@ -188,7 +188,7 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
             animator.setDuration(1);
             animator.start();
         }
-        putData();
+        putData();   //更新数据
     }
 
 
@@ -205,8 +205,8 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
             tv_1_num.setText(10 + i + "");
             iv_1_ic.setBackgroundResource(R.drawable._2_weixin);
         }
-        ZhuangJiaoDu();
-        initChuShiHua();
+        ZhuangJiaoDu();   //转移角度对其中间
+        initChuShiHua();   //初始化转盘
     }
 
 
@@ -230,7 +230,7 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
                 }
                 putLuckData(2);
                 break;
-            case R.id.tv_add:
+            case R.id.tv_add:      //添加数据
                 initAdd();
                 break;
         }
@@ -327,6 +327,8 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
             public void onAnimationEnd(Animator animator) {
                 img_face.setBackgroundResource(R.drawable._2_weixin);
 
+
+                //选中人的动画渐隐渐现动画
                 img_face.setAlpha(1.0f);
                 img_face.setAnimation(alphaAnimation);
                 alphaAnimation.start();
