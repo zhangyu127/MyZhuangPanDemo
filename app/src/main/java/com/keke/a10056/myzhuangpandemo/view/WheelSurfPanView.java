@@ -369,8 +369,6 @@ public class WheelSurfPanView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-
-
         // 计算初始角度
         // 从最上面开始绘制扇形会好看一点
         float startAngle = -mAngle / 2 - 90;

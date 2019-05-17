@@ -239,14 +239,19 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
 
         new Handler().postDelayed(new Runnable() {
             public void run() {
-                colors.remove((colors.size() - num + 1) %
-                        colors.size());
+                if (colors.size()>1){
+                    colors.remove((colors.size() - num + 1) %
+                            colors.size());
+                }
 
-                rl_dzp.removeView(views.get((colors.size() - num + 1) %
-                        colors.size()));
+                if (views.size()>1){
+                    rl_dzp.removeView(views.get((colors.size() - num + 1) %
+                            colors.size()));
 
-                views.remove((colors.size() - num + 1) %
-                        colors.size());
+                    views.remove((colors.size() - num + 1) %
+                            colors.size());
+                }
+
 
 
                 handler.sendEmptyMessage(1);
