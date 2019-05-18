@@ -224,7 +224,7 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
                 cancel();
                 break;
             case R.id.img_qidong:   //中间转盘按钮
-                if (colors.size() == 1) {
+                if (colors.size() == 2) {
                     Toast.makeText(ac, "目前只有一人无法进行游戏！！！！！", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -241,7 +241,7 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
      * 添加数据
      **/
     private void initAdd() {
-        if (colors.size() == 8) {
+        if (colors.size() == 10) {
             Toast.makeText(ac, "已经到达游戏上线人数！！！！！", Toast.LENGTH_LONG).show();
             return;
         }
@@ -255,21 +255,13 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
      * 删除数据
      **/
 
-    /*
-     * handler没有释放   进行从新编写
-     * */
     private void initClear(final int num) {
-
-        new Handler().postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
             public void run() {
                 if (colors.size() > 1) {
                     colors.remove((colors.size() - num + 1) %
                             colors.size());
                 }
-
-                /*
-                 *  这里判断进行重新判断
-                 * */
 
                 if (views.size() > 1) {
                     rl_dzp.removeView(views.get((colors.size() - num + 1) %
@@ -395,5 +387,13 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
             }
         });
         animator.start();
+    }
+
+    @Override
+    public void dismiss() {
+        super.dismiss();
+        if (handler != null) {
+            handler.removeCallbacksAndMessages(null);
+        }
     }
 }
