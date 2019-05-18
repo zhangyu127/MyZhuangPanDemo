@@ -2,7 +2,7 @@ package com.keke.a10056.myzhuangpandemo;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
@@ -13,7 +13,6 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -71,10 +70,10 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
         public boolean handleMessage(Message message) {
             switch (message.what) {
                 case 1:     //删除
-                    //动画取消    
+                    //一开始先设置透明，这样图片不会显示，等点击按钮时再显示
                     img_face.setAlpha(0.0f);
-                    img_face.setAnimation(alphaAnimation);
-                    alphaAnimation.start();
+                    alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+                    alphaAnimation.setFillAfter(true);
 
 
                     for (int i = 0; i < views.size(); i++) {
@@ -139,6 +138,7 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
     /**
      * 初始化界面控件
      */
+    @SuppressLint("WrongViewCast")
     private void initView() {
 //        初始化大装盘
         rl_dzp = ((RelativeLayout) findViewById(R.id.rl_dzp));
@@ -254,16 +254,24 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
     /**
      * 删除数据
      **/
+
+    /*
+     * handler没有释放   进行从新编写
+     * */
     private void initClear(final int num) {
 
         new Handler().postDelayed(new Runnable() {
             public void run() {
-                if (colors.size()>1){
+                if (colors.size() > 1) {
                     colors.remove((colors.size() - num + 1) %
                             colors.size());
                 }
 
-                if (views.size()>1){
+                /*
+                 *  这里判断进行重新判断
+                 * */
+
+                if (views.size() > 1) {
                     rl_dzp.removeView(views.get((colors.size() - num + 1) %
                             colors.size()));
 
@@ -326,7 +334,6 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
             @Override
             public void onAnimationEnd(Animator animator) {
                 img_face.setBackgroundResource(R.drawable._2_weixin);
-
 
                 //选中人的动画渐隐渐现动画
                 img_face.setAlpha(1.0f);
