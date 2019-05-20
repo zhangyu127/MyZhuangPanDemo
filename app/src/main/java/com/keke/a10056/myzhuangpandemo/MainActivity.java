@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity   {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new BigSoundBoardDialog(MainActivity.this).show();
+                new MyZyDzpDialog(MainActivity.this).show();
             }
         });
     }

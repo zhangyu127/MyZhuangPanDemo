@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:wheelSurfView="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true">
+
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/guanbi3x" />
+
+
+        <!--  -->
+        <TextView
+            android:id="@+id/play"
+            android:layout_width="188dp"
+            android:layout_height="38dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="122dp"
+            android:background="@drawable/shape_floater_top_6"
+            android:gravity="center"
+            android:text="试试手气"
+            android:textColor="#FFFFFFFF"
+            android:textSize="18sp" />
+
+
+        <TextView
+        android:id="@+id/tv_add"
+        android:layout_width="188dp"
+        android:layout_height="38dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/shape_floater_top_6"
+        android:gravity="center"
+        android:text="添加人数"
+        android:textColor="#FFFFFFFF"
+        android:textSize="18sp" />
+
+
+
+        <TextView
+            android:id="@+id/tv_clear"
+            android:layout_width="188dp"
+            android:layout_height="38dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="38dp"
+            android:background="@drawable/shape_floater_top_6"
+            android:gravity="center"
+            android:text="删减人数"
+            android:textColor="#FFFFFFFF"
+            android:textSize="18sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_close">
+
+        <com.keke.a10056.myzhuangpandemo.DzpView
+            android:id="@+id/dzp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </com.keke.a10056.myzhuangpandemo.DzpView>
+
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>
