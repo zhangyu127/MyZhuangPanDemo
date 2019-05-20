@@ -36,15 +36,30 @@
 
 
         <TextView
-            android:id="@+id/tv_add"
+        android:id="@+id/tv_add"
+        android:layout_width="188dp"
+        android:layout_height="38dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/shape_floater_top_6"
+        android:gravity="center"
+        android:text="添加人数"
+        android:textColor="#FFFFFFFF"
+        android:textSize="18sp" />
+
+
+
+        <TextView
+            android:id="@+id/tv_clear"
             android:layout_width="188dp"
             android:layout_height="38dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="38dp"
             android:background="@drawable/shape_floater_top_6"
             android:gravity="center"
-            android:text="添加人数"
+            android:text="删减人数"
             android:textColor="#FFFFFFFF"
             android:textSize="18sp" />
 

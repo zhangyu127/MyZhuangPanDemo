@@ -152,7 +152,7 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
         findViewById(R.id.img_qidong).setOnClickListener(this);
         findViewById(R.id.iv_close).setOnClickListener(this);
         findViewById(R.id.tv_add).setOnClickListener(this);
-
+        findViewById(R.id.tv_clear).setOnClickListener(this);
     }
 
 
@@ -168,9 +168,7 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
         alphaAnimation.setFillAfter(true);   //动画结束时保持结束的画面
 
         colors = new ArrayList<>();
-        colors.add(Color.parseColor("#F6829F"));
-        colors.add(Color.parseColor("#E83030"));
-        colors.add(Color.parseColor("#464AE1"));
+
 
         //实现item布局
         views = new ArrayList<>();
@@ -233,6 +231,9 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
             case R.id.tv_add:      //添加数据
                 initAdd();
                 break;
+            case R.id.tv_clear: //删除数据
+                initClear(1);
+                break;
         }
     }
 
@@ -258,6 +259,8 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
     private void initClear(final int num) {
         handler.postDelayed(new Runnable() {
             public void run() {
+
+                //添加数据大于一  才能删除
                 if (colors.size() > 1) {
                     colors.remove((colors.size() - num + 1) %
                             colors.size());
