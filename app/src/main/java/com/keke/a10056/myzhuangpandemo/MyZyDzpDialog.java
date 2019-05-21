@@ -63,7 +63,7 @@ public class MyZyDzpDialog extends Dialog implements View.OnClickListener {
         findViewById(R.id.iv_close).setOnClickListener(this);
         findViewById(R.id.tv_add).setOnClickListener(this);
         findViewById(R.id.tv_clear).setOnClickListener(this);
-
+        dzpView.setImageFace(R.mipmap.node);
     }
 
 
@@ -79,16 +79,11 @@ public class MyZyDzpDialog extends Dialog implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.play:    //按钮启动转盘
-
                 break;
             case R.id.iv_close:   //dissmiss取消按钮
                 dismiss();
                 break;
-            case R.id.img_qidong:   //中间转盘按钮
-
-                break;
             case R.id.tv_add:      //添加数据
-
                 break;
             case R.id.tv_clear: //删除数据
 

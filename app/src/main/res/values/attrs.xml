@@ -30,4 +30,10 @@
         <attr name="textColor" format="reference|color" />
     </declare-styleable>
 
+
+    <declare-styleable name="dzp_view">
+        <!--中间图片的引用 有默认值 不填则使用默认值-->
+        <attr name="dzp_image" format="reference" />
+    </declare-styleable>
+
 </resources>
