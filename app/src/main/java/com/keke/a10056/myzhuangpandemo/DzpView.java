@@ -22,17 +22,33 @@ import com.keke.a10056.myzhuangpandemo.view.WheelSurfView;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * 2019/5/21（喜庆的日子）
+ * 张宇
+ * 自定义DzpView，通过自定义底部的扇形（借鉴）和上面的RelativeLayout控件addview添加的view通过动画进行
+ * 计算角度旋转变成上面的扇形，实现抽奖大转盘，并且使用多种转盘，可以进行增删来回切换，使用灵活
+ * 用系统自定义的view，实现上面扇形上面的图片进行灵活的添加，并且还要计算角度，bitmap进行回收的话会报canvas回收错误，
+ * 如果不回收，bitmap会过大，报内存溢出！！！！
+ **/
 public class DzpView extends RelativeLayout {
 
+    //上下文对象
     private Context context;
 
+
+    //实现动画渐隐渐出效果
     private AlphaAnimation alphaAnimation;
     private TransitionDrawable transitionDrawable;
 
-
+    //底部转盘
     private WheelSurfView wheelSurfView;
+    //上层转盘布局rl_dzp
     private RelativeLayout rl_dzp, rl_jl, rl_baoguo;
+    //启动按键go   动画停止显示的图片
     private ImageView img_qidong, img_face;
+
+    //数据名字列表
     private List<String> nameDzp;
 
     //颜色的集合
@@ -49,10 +65,10 @@ public class DzpView extends RelativeLayout {
     //最低圈数 默认值3 也就是说每次旋转都会最少转3圈
     private int mMinTime = 6;
 
-    //转盘绑定
+    //底部转盘绑定
     private WheelSurfView.Builder build;
 
-
+    //handler实现删除和添加
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message message) {
@@ -123,7 +139,6 @@ public class DzpView extends RelativeLayout {
     public DzpView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
-
     }
 
     //开始抽奖的图标
@@ -161,7 +176,6 @@ public class DzpView extends RelativeLayout {
      * 初始化数据
      **/
     public void initData() {
-
         //一开始先设置透明，这样图片不会显示，等点击按钮时再显示
         img_face.setAlpha(0.0f);
         alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
