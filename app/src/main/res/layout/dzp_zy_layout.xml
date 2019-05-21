@@ -4,10 +4,6 @@
     android:layout_height="wrap_content"
     xmlns:wheelSurfView="http://schemas.android.com/apk/res-auto">
 
-        <RelativeLayout
-            android:id="@+id/rl_baoguo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
 
             <com.keke.a10056.myzhuangpandemo.view.WheelSurfView
@@ -71,7 +67,6 @@
                 android:layout_centerInParent="true"
                 android:background="@mipmap/node" />
 
-        </RelativeLayout>
 
 
         <ImageView

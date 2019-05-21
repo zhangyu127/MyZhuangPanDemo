@@ -44,7 +44,7 @@ public class DzpView extends RelativeLayout {
     //底部转盘
     private WheelSurfView wheelSurfView;
     //上层转盘布局rl_dzp
-    private RelativeLayout rl_dzp, rl_jl, rl_baoguo;
+    private RelativeLayout rl_dzp, rl_jl;
     //启动按键go   动画停止显示的图片
     private ImageView img_qidong, img_face;
 
@@ -124,7 +124,6 @@ public class DzpView extends RelativeLayout {
         this.context = context;
         //导入布局
         LayoutInflater.from(context).inflate(R.layout.dzp_zy_layout, this);
-        rl_baoguo = (RelativeLayout) findViewById(R.id.rl_baoguo);
         rl_dzp = (RelativeLayout) findViewById(R.id.rl_dzp);
         rl_jl = (RelativeLayout) findViewById(R.id.rl_jl);
         wheelSurfView = (WheelSurfView) findViewById(R.id.wheelSurfView2);
@@ -248,6 +247,7 @@ public class DzpView extends RelativeLayout {
         colors.add(colrs);
         nameDzp.add(name.toString());
 
+        //发送handler
         handler.sendEmptyMessage(2);
 
     }
