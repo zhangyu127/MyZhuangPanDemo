@@ -100,7 +100,7 @@ public class WheelSurfView extends RelativeLayout {
     }
 
     public void setConfig(Builder builder) {
-        if (builder.mColors != null)
+
             mWheelSurfPanView.setmColors(builder.mColors);
         if (builder.mHuanImgRes != 0)
             mWheelSurfPanView.setmHuanImgRes(builder.mHuanImgRes);
@@ -112,8 +112,9 @@ public class WheelSurfView extends RelativeLayout {
             mWheelSurfPanView.setmTextSize(builder.mTextSize);
         if (builder.mVarTime != 0)
             mWheelSurfPanView.setmVarTime(builder.mVarTime);
-        if (builder.mTypeNum != 0)
+
             mWheelSurfPanView.setmTypeNum(builder.mTypeNum);
+
         mWheelSurfPanView.show();
     }
 

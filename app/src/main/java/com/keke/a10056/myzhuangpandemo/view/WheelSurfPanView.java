@@ -163,7 +163,7 @@ public class WheelSurfPanView extends View {
 
                     mHuanImgRes = typedArray.getResourceId(R.styleable.wheelSurfView_huanImg, 0);
                     if (mHuanImgRes == 0)
-                        mYuanHuan = BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.yuanhuan);
+                        mYuanHuan = BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.yuan);
                     else {
                         mYuanHuan = BitmapFactory.decodeResource(mContext.getResources(), mHuanImgRes);
                     }
@@ -420,7 +420,7 @@ public class WheelSurfPanView extends View {
     public void show() {
         mYuanHuan = null;
 
-        mYuanHuan = BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.yuanhuan);
+        mYuanHuan = BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.yuan);
         //文字大小
         if (mTextSize == 0)
             mTextSize = 14 * getScale();
