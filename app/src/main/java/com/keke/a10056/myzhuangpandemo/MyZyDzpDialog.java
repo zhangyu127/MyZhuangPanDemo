@@ -62,7 +62,6 @@ public class MyZyDzpDialog extends Dialog implements View.OnClickListener {
         findViewById(R.id.iv_close).setOnClickListener(this);
         findViewById(R.id.tv_add).setOnClickListener(this);
         findViewById(R.id.tv_clear).setOnClickListener(this);
-        dzpView.setImageFace(R.mipmap.node);
     }
 
 

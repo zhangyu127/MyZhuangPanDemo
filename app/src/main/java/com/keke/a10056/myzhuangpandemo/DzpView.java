@@ -142,8 +142,16 @@ public class DzpView extends RelativeLayout {
         if (mGoImgRes != 0) {
             img_qidong.setImageResource(mGoImgRes);
         }
-        initData();
 
+
+        img_qidong.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                putLuckData(1);
+            }
+        });
+
+        initData();
     }
 
     /**
@@ -378,7 +386,7 @@ public class DzpView extends RelativeLayout {
     }
 
     public void setImageFace(int resId) {
-        img_face.setImageResource(resId);
+        img_qidong.setImageResource(resId);
     }
 
 
