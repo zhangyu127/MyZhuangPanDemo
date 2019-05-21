@@ -185,12 +185,15 @@ public class WheelSurfPanView extends View {
                     int colorArray = typedArray.getResourceId(R.styleable.wheelSurfView_colors, -1);
 
                     if (colorArray == -1) throw new RuntimeException("找不到背景颜色");
+
                     String[] colorStrs = context.getResources().getStringArray(colorArray);
+
                     if (mIcons == null || colorStrs == null)
                         throw new RuntimeException("找不到描述或图片或背景颜色资源");
 
                     if (mIcons.length != mTypeNum || colorStrs.length != mTypeNum)
                         throw new RuntimeException("资源或描述或背景颜色的长度和mTypeNum不一致");
+
                     mColors = new Integer[mTypeNum];
                     //分析背景颜色
                     for (int i = 0; i < colorStrs.length; i++) {
@@ -283,9 +286,6 @@ public class WheelSurfPanView extends View {
     }
 
 
-
-
-
     //目前的角度
     private float currAngles = 0;
     //记录上次的位置
@@ -293,7 +293,6 @@ public class WheelSurfPanView extends View {
 
     /**
      * 转动角度
-     *
      */
     public void startZhangJiaoDu() {
         //最低圈数是mMinTimes圈
@@ -327,8 +326,6 @@ public class WheelSurfPanView extends View {
         // 正式开始启动执行动画
         anim.start();
     }
-
-
 
 
     @Override
@@ -380,21 +377,20 @@ public class WheelSurfPanView extends View {
         int width = getWidth() - paddingLeft - paddingRight;
         int height = getHeight() - paddingTop - paddingBottom;
 
-        for (int i = 0; i < mTypeNum; i++) {
-            //设置绘制时画笔的颜色
-            mPaint.setColor(mColors[i]);
-            //画一个扇形
-            RectF rect = new RectF(mCenter - mRadius, mCenter - mRadius, mCenter
-                    + mRadius, mCenter + mRadius);
-            canvas.drawArc(rect, startAngle, mAngle, true, mPaint);
+            for (int i = 0; i < mTypeNum; i++) {
+                //设置绘制时画笔的颜色
+                mPaint.setColor(mColors[i]);
+                //画一个扇形
+                RectF rect = new RectF(mCenter - mRadius, mCenter - mRadius, mCenter
+                        + mRadius, mCenter + mRadius);
+                canvas.drawArc(rect, startAngle, mAngle, true, mPaint);
 
-            mTextPaint.setColor(mTextColor);
-            drawText(startAngle, "", mRadius, mTextPaint, canvas);
+                mTextPaint.setColor(mTextColor);
+                drawText(startAngle, "", mRadius, mTextPaint, canvas);
 
-            //重置开始角度
-            startAngle = startAngle + mAngle;
-        }
-
+                //重置开始角度
+                startAngle = startAngle + mAngle;
+            }
         //最后绘制圆环
         Rect mDestRect = new Rect(0, 0, mWidth, mWidth);
         canvas.drawBitmap(mYuanHuan, null, mDestRect, mPaint);
@@ -422,7 +418,7 @@ public class WheelSurfPanView extends View {
 
     //再一次onDraw
     public void show() {
-        mYuanHuan=null;
+        mYuanHuan = null;
 
         mYuanHuan = BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.yuanhuan);
         //文字大小

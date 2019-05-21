@@ -86,6 +86,7 @@ public class DzpView extends RelativeLayout {
                         animator.setDuration(1);
                         animator.start();
                     }
+
                     putData();
 
                     break;
@@ -106,6 +107,24 @@ public class DzpView extends RelativeLayout {
                     }
                     //为每一个控件赋值  并计算角度
                     putData();
+                    break;
+
+                case 3:     //删除
+
+                    //一开始先设置透明，这样图片不会显示，等点击按钮时再显示
+                    img_face.setAlpha(0.0f);
+                    alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+                    alphaAnimation.setFillAfter(true);
+
+
+                    for (int i = 0; i < views.size(); i++) {
+                        ObjectAnimator animator = ObjectAnimator.ofFloat(views.get(i), "rotation", 0f, (float) (i * (360.0 / views.size())));
+                        animator.setDuration(1);
+                        animator.start();
+                    }
+
+                    putData();
+
                     break;
                 default:
                     break;
@@ -164,7 +183,9 @@ public class DzpView extends RelativeLayout {
         img_qidong.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                putLuckData(1);
+                if (nameDzp.size()!=0){
+                    putLuckData(1);
+                }
             }
         });
 
@@ -229,7 +250,7 @@ public class DzpView extends RelativeLayout {
     private void initChuShiHua() {
         build = new WheelSurfView.Builder()
                 .setmColors(colors)
-                .setmTypeNum(colors.size())
+                .setmTypeNum(nameDzp.size())
                 .build();
         wheelSurfView.setConfig(build);
         wheelSurfView.startZhangJiaoDu();
@@ -286,20 +307,33 @@ public class DzpView extends RelativeLayout {
      **/
     public void initClearStart(int num) {
         //添加数据大于一  才能删除
-        if (nameDzp.size() > 1) {
-            colors.remove((nameDzp.size() - num + 1) %
-                    nameDzp.size());
-            nameDzp.remove((nameDzp.size() - num + 1) %
-                    nameDzp.size());
-        }
-        if (views.size() > 1) {
-            rl_dzp.removeView(views.get((nameDzp.size() - num + 1) %
-                    nameDzp.size()));
+        if (nameDzp.size() > 0) {
+            if (nameDzp.size() == 1) {
 
-            views.remove((nameDzp.size() - num + 1) %
-                    nameDzp.size());
+                colors.remove(0);
+                nameDzp.remove(0);
+                rl_dzp.removeView(views.get(0));
+                views.remove(0);
+
+                handler.sendEmptyMessage(3);
+
+            } else {
+                if (nameDzp.size() > 1) {
+                    colors.remove((nameDzp.size() - num + 1) %
+                            nameDzp.size());
+                    nameDzp.remove((nameDzp.size() - num + 1) %
+                            nameDzp.size());
+                }
+                if (views.size() > 1) {
+                    rl_dzp.removeView(views.get((nameDzp.size() - num + 1) %
+                            nameDzp.size()));
+
+                    views.remove((nameDzp.size() - num + 1) %
+                            nameDzp.size());
+                }
+                handler.sendEmptyMessage(1);
+            }
         }
-        handler.sendEmptyMessage(1);
     }
 
 
