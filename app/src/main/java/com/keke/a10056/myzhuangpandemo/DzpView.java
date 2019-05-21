@@ -59,7 +59,6 @@ public class DzpView extends RelativeLayout {
             switch (message.what) {
                 case 1:     //删除
 
-
                     //一开始先设置透明，这样图片不会显示，等点击按钮时再显示
                     img_face.setAlpha(0.0f);
                     alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
@@ -130,6 +129,10 @@ public class DzpView extends RelativeLayout {
     //开始抽奖的图标
     private Integer mGoImgRes;
 
+
+    /**
+     * 初始化转盘
+     **/
     private void initStyle(TypedArray typedArray) {
         try {
             //获得属性值
@@ -143,7 +146,7 @@ public class DzpView extends RelativeLayout {
             img_qidong.setImageResource(mGoImgRes);
         }
 
-
+        //监听方法
         img_qidong.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,13 +154,12 @@ public class DzpView extends RelativeLayout {
             }
         });
 
-        initData();
+        initData();//初始化数据
     }
 
     /**
      * 初始化数据
      **/
-
     public void initData() {
 
         //一开始先设置透明，这样图片不会显示，等点击按钮时再显示
@@ -203,6 +205,7 @@ public class DzpView extends RelativeLayout {
             tv_1_num.setText(nameDzp.get(i) + "");
             iv_1_ic.setBackgroundResource(R.drawable._2_weixin);
         }
+        ZhuangJiaoDu();   //转移角度对其中间
         initChuShiHua();   //初始化转盘
     }
 
@@ -239,7 +242,6 @@ public class DzpView extends RelativeLayout {
     /**
      * 动画结束删除数据
      **/
-
     public void initClearEnd(final int num) {
         handler.postDelayed(new Runnable() {
             public void run() {
@@ -268,7 +270,6 @@ public class DzpView extends RelativeLayout {
     /**
      * 没有开始删除数据
      **/
-
     public void initClearStart(int num) {
         //添加数据大于一  才能删除
         if (nameDzp.size() > 1) {
@@ -333,12 +334,10 @@ public class DzpView extends RelativeLayout {
 
             @Override
             public void onAnimationCancel(Animator animator) {
-
             }
 
             @Override
             public void onAnimationRepeat(Animator animator) {
-
             }
         });
         animator.start();
@@ -385,11 +384,25 @@ public class DzpView extends RelativeLayout {
         animator.start();
     }
 
+
+    //启动按钮更改图像
     public void setImageFace(int resId) {
         img_qidong.setImageResource(resId);
     }
 
 
+    //启动按钮可以点击
+    public void setEnaTrue(Boolean isFor) {
+        img_qidong.setEnabled(isFor);
+    }
+
+
+    //启动按钮不可以点击
+    public void setEnaFalse(Boolean isFor) {
+        img_qidong.setEnabled(isFor);
+    }
+
+    //销毁handler
     public void dzpDismiss() {
         if (handler != null) {
             handler.removeCallbacksAndMessages(null);

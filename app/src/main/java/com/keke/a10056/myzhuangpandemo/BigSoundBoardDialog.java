@@ -187,6 +187,7 @@ public class BigSoundBoardDialog extends Dialog implements View.OnClickListener 
             animator.start();
         }
         putData();   //更新数据
+
     }
 
 
