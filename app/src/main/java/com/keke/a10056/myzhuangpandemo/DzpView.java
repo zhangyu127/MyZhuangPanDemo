@@ -33,8 +33,7 @@ public class DzpView extends RelativeLayout {
     private WheelSurfView wheelSurfView;
     private RelativeLayout rl_dzp, rl_jl, rl_baoguo;
     private ImageView img_qidong, img_face;
-    private  List<String >name;
-    private  List<Integer>image;
+    private List<String> nameDzp;
 
     //颜色的集合
     private List<Integer> colors;
@@ -59,6 +58,13 @@ public class DzpView extends RelativeLayout {
         public boolean handleMessage(Message message) {
             switch (message.what) {
                 case 1:     //删除
+
+
+                    //一开始先设置透明，这样图片不会显示，等点击按钮时再显示
+                    img_face.setAlpha(0.0f);
+                    alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+                    alphaAnimation.setFillAfter(true);
+
 
                     for (int i = 0; i < views.size(); i++) {
                         ObjectAnimator animator = ObjectAnimator.ofFloat(views.get(i), "rotation", 0f, (float) (i * (360.0 / views.size())));
@@ -145,10 +151,20 @@ public class DzpView extends RelativeLayout {
      **/
 
     public void initData() {
+
+        //一开始先设置透明，这样图片不会显示，等点击按钮时再显示
+        img_face.setAlpha(0.0f);
+        alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+        alphaAnimation.setDuration(2000);    //深浅动画持续时间
+        alphaAnimation.setFillAfter(true);   //动画结束时保持结束的画面
+
         colors = new ArrayList<>();
+        nameDzp = new ArrayList<>();
+
+
         //实现item布局
         views = new ArrayList<>();
-        for (int i = 0; i < colors.size(); i++) {
+        for (int i = 0; i < nameDzp.size(); i++) {
             View inflate = LayoutInflater.from(getContext()).inflate(R.layout.board_item, rl_dzp, false);
             View view = inflate.findViewById(R.id.ll_1);
             views.add(view);
@@ -176,7 +192,7 @@ public class DzpView extends RelativeLayout {
             View view = views.get(i);
             TextView tv_1_num = (TextView) view.findViewById(R.id.tv_dzp_num);
             ImageView iv_1_ic = (ImageView) view.findViewById(R.id.iv_1_ic);
-            tv_1_num.setText(10 + i + "");
+            tv_1_num.setText(nameDzp.get(i) + "");
             iv_1_ic.setBackgroundResource(R.drawable._2_weixin);
         }
         initChuShiHua();   //初始化转盘
@@ -199,11 +215,13 @@ public class DzpView extends RelativeLayout {
     /**
      * 添加数据
      **/
-    public void initAdd(List<Integer> bjs, List<String> name, List<Integer> image) {
+    public void initAdd(String name, Integer colrs) {
         if (colors.size() == 10) {
             Toast.makeText(context, "已经到达游戏上线人数！！！！！", Toast.LENGTH_LONG).show();
             return;
         }
+        colors.add(colrs);
+        nameDzp.add(name.toString());
 
         handler.sendEmptyMessage(2);
 
@@ -211,30 +229,54 @@ public class DzpView extends RelativeLayout {
 
 
     /**
-     * 删除数据
+     * 动画结束删除数据
      **/
 
-    public void initClear(final int num) {
+    public void initClearEnd(final int num) {
         handler.postDelayed(new Runnable() {
             public void run() {
-
                 //添加数据大于一  才能删除
-                if (colors.size() > 1) {
-                    colors.remove((colors.size() - num + 1) %
-                            colors.size());
+                if (nameDzp.size() > 1) {
+                    colors.remove((nameDzp.size() - num + 1) %
+                            nameDzp.size());
+                    nameDzp.remove((nameDzp.size() - num + 1) %
+                            nameDzp.size());
                 }
 
                 if (views.size() > 1) {
-                    rl_dzp.removeView(views.get((colors.size() - num + 1) %
-                            colors.size()));
+                    rl_dzp.removeView(views.get((nameDzp.size() - num + 1) %
+                            nameDzp.size()));
 
-                    views.remove((colors.size() - num + 1) %
-                            colors.size());
+                    views.remove((nameDzp.size() - num + 1) %
+                            nameDzp.size());
                 }
                 handler.sendEmptyMessage(1);
             }
 
         }, 4000);
+    }
+
+
+    /**
+     * 没有开始删除数据
+     **/
+
+    public void initClearStart(int num) {
+        //添加数据大于一  才能删除
+        if (nameDzp.size() > 1) {
+            colors.remove((nameDzp.size() - num + 1) %
+                    nameDzp.size());
+            nameDzp.remove((nameDzp.size() - num + 1) %
+                    nameDzp.size());
+        }
+        if (views.size() > 1) {
+            rl_dzp.removeView(views.get((nameDzp.size() - num + 1) %
+                    nameDzp.size()));
+
+            views.remove((nameDzp.size() - num + 1) %
+                    nameDzp.size());
+        }
+        handler.sendEmptyMessage(1);
     }
 
 
@@ -245,7 +287,6 @@ public class DzpView extends RelativeLayout {
         wheelSurfView.startRotate(type);
         play(type);
     }
-
 
     /**
      * 动画效果转盘
@@ -263,8 +304,6 @@ public class DzpView extends RelativeLayout {
 
         ObjectAnimator animator = ObjectAnimator.ofFloat(rl_dzp, "rotation", currAngle, newAngle);
 
-//        currAngle = newAngle;
-////        lastPosition = num;
         animator.setDuration(nums * mVarTime);
         animator.addListener(new Animator.AnimatorListener() {
             @Override
@@ -281,7 +320,7 @@ public class DzpView extends RelativeLayout {
                 img_face.setAnimation(alphaAnimation);
                 alphaAnimation.start();
 
-                initClear(num);
+                initClearEnd(num);
             }
 
             @Override

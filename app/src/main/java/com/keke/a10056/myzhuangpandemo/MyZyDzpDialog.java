@@ -57,7 +57,6 @@ public class MyZyDzpDialog extends Dialog implements View.OnClickListener {
     @SuppressLint("WrongViewCast")
     private void initView() {
 //        初始化大装盘
-
         dzpView = (DzpView) findViewById(R.id.dzp);
         findViewById(R.id.play).setOnClickListener(this);
         findViewById(R.id.iv_close).setOnClickListener(this);
@@ -79,14 +78,16 @@ public class MyZyDzpDialog extends Dialog implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.play:    //按钮启动转盘
+                dzpView.putLuckData(1);
                 break;
             case R.id.iv_close:   //dissmiss取消按钮
                 dismiss();
                 break;
             case R.id.tv_add:      //添加数据
+                dzpView.initAdd("zhangyu", Color.parseColor("#4394C5"));
                 break;
             case R.id.tv_clear: //删除数据
-
+                dzpView.initClearStart(2);
                 break;
         }
     }
@@ -95,5 +96,6 @@ public class MyZyDzpDialog extends Dialog implements View.OnClickListener {
     @Override
     public void dismiss() {
         super.dismiss();
+        dzpView.dzpDismiss();
     }
 }
